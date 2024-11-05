@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Screening - ACME Transaction Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #005f73;
+            color: #fff;
+            text-align: center;
+            padding: 0.1rem;
+        }
+        nav {
+            background-color: #0a9396;
+            color: #fff;
+            padding: 0.5rem;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0.1;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .compliance-container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #005f73;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        footer {
+            background-color: #005f73;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Compliance Screening</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>                                    
+        </ul>
+    </nav>
+
+    <div class="compliance-container">
+        <h2>Recent Transactions</h2>
+        <p>Below is a table of recent payment transactions that have undergone compliance screening and are prioritized for your review:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="transaction-details.html?id=TRX001">10009980911911101</a></td>
+                    <td>2024-11-18</td>
+                    <td>1,800,000</td>
+                    <td>GBP</td>
+                    <td>ABC Capital</td>
+                    <td>XYZ Consultancy Services</td>
+                    <td>Flagged</td>
+                </tr>
+                <tr>
+                    <td><a href="transaction-details.html?id=TRX002">10009980911911102</a></td>
+                    <td>2024-11-19</td>
+                    <td>1,800,000</td>
+                    <td>GBP</td>
+                    <td>ABC Capital</td>
+                    <td>XYZ Consultancy Services</td>
+                    <td>Flagged</td>
+                </tr>
+                <tr>
+                    <td><a href="transaction-details.html?id=TRX003">10009980911911103</a></td>
+                    <td>2024-11-19</td>
+                    <td>1,500,000</td>
+                    <td>CAD</td>
+                    <td>Charlie Tremblay</td>
+                    <td>Los Pollos Hermanos</td>
+                    <td>Flagged</td>
+                </tr>
+                <tr>
+                    <td><a href="transaction-details.html?id=TRX004">10009980911911104</a></td>
+                    <td>2024-11-19</td>
+                    <td>1,200,000</td>
+                    <td>USD</td>
+                    <td>Madrigal Electromotive GmbH</td>
+                    <td>Treadstone</td>
+                    <td>Flagged</td>
+                </tr>
+                <tr>
+                    <td><a href="transaction-details.html?id=TRX005">10009980911911105</a></td>
+                    <td>2024-11-19</td>
+                    <td>100,000</td>
+                    <td>AUD</td>
+                    <td>Springfield Nuclear Power Plant</td>
+                    <td>Homer Simpson</td>
+                    <td>Flagged</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ACME Transaction Monitoring. All rights reserved.</p>
+    </footer>
+</body>
+</html>

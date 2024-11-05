@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details - ACME Transaction Monitoring</title>
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        // Sample transaction data (in a real application, this would come from a server)
+        const transactions = {
+            'TRX001': {
+                date: '2023-05-01',
+                amount: '10,000',
+                currency: 'USD',
+                status: 'Cleared',
+                senderName: 'John Doe',
+                senderAccount: '1234567890',
+                senderBank: 'Bank of America',
+                beneficiaryName: 'Jane Smith',
+                beneficiaryAccount: '0987654321',
+                beneficiaryBank: 'Wells Fargo',
+                notes: 'Payment for consulting services.'
+            },
+            'TRX002': {
+                date: '2023-05-02',
+                amount: '5,000',
+                currency: 'EUR',
+                status: 'Under Review',
+                senderName: 'Alice Johnson',
+                senderAccount: '2345678901',
+                senderBank: 'Deutsche Bank',
+                beneficiaryName: 'Bob Williams',
+                beneficiaryAccount: '1098765432',
+                beneficiaryBank: 'BNP Paribas',
+                notes: 'Monthly rent payment. Additional verification required.'
+            },
+            // Add more transactions as needed
+        };
+
+        // Get the transaction ID from the URL
+        const transactionId = getUrlParameter('id');
+
+        // Populate the page with transaction details
+        setTimeout(() => {
+            if (transactions[transactionId]) {
+                const tx = transactions[transactionId];
+                document.getElementById('transactionId').textContent += transactionId;
+                document.getElementById('date').textContent = tx.date;
+                document.getElementById('amount').textContent = tx.amount;
+                document.getElementById('currency').textContent = tx.currency;
+                document.getElementById('status').textContent = tx.status;
+                document.getElementById('senderName').textContent = tx.senderName;
+                document.getElementById('senderAccount').textContent = tx.senderAccount;
+                document.getElementById('senderBank').textContent = tx.senderBank;
+                document.getElementById('beneficiaryName').textContent = tx.beneficiaryName;
+                document.getElementById('beneficiaryAccount').textContent = tx.beneficiaryAccount;
+                document.getElementById('beneficiaryBank').textContent = tx.beneficiaryBank;
+                document.getElementById('notes').textContent = tx.notes;
+            } else {
+                document.querySelector('.trx-container').innerHTML = '<h2>Transaction not found</h2>';
+            }
+            document.documentElement.style.setProperty('--header-height', document.querySelector('header').offsetHeight + 'px');
+            document.documentElement.style.setProperty('--nav-height', document.querySelector('nav').offsetHeight + 'px');
+        }, [300]);
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 0.9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #005f73;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        nav {
+            background-color: #0a9396;
+            color: #fff;
+            padding: 0.5rem;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .page-container {
+            display: flex;
+            gap: 10px;
+            width: 95%;
+            height: calc(100vh - var(--header-height) - var(--nav-height) - 1rem);
+            margin: auto;
+        }
+        .trx-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 400px;
+        }
+        .detail-section {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        .text-data {
+            display: flex;
+            justify-content: space-between;
+        }
+        .iframe-container {
+            flex-grow: 1;
+            height: calc(100% - 80px);
+        }
+        h2 {
+            color: #005f73;
+        }
+        footer {
+            background-color: #005f73;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Transaction Details</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="compliance-screening.html">Compliance Screening</a></li>
+        </ul>
+    </nav>
+    <div class="page-container">
+        <div class="trx-details-section">
+            <h2 id="transactionId">Transaction ID: </h2>
+            <div class="trx-container">
+                <div class="detail-section">
+                    <h3>Payment Details</h3>
+                    <div class="text-data">Date: <span id="date"></span></div>
+                    <div class="text-data">Amount: <span id="amount"></span></div>
+                    <div class="text-data">Currency: <span id="currency"></span></div>
+                    <div class="text-data">Status: <span id="status"></span></div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Sender Details</h3>
+                    <div class="text-data">Name: <span id="senderName"></span></div>
+                    <div class="text-data">Account: <span id="senderAccount"></span></div>
+                    <div class="text-data">Bank: <span id="senderBank"></span></div>
+                </div>
+                <div class="detail-section">
+                    <h3>Beneficiary Details</h3>
+                    <div class="text-data">Name: <span id="beneficiaryName"></span></div>
+                    <div class="text-data">Account: <span id="beneficiaryAccount"></span></div>
+                    <div class="text-data">Bank: <span id="beneficiaryBank"></span></div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Notes</h3>
+                    <p id="notes"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="iframe-container">
+            <h2>Automation Co-Pilot</h2>
+            <iframe src='https://aa-pmorgdemo.cloud.automationanywhere.digital/copilot?tags=%5B%22Payments%22%5D' name="Automation Co-pilot Assistant" referrerpolicy="origin" width="100%" height="100%" style="border: 1px solid #ddd;"/>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ACME Transaction Monitoring</p>
+    </footer>
+</body>
+</html>
