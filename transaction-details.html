@@ -15,31 +15,31 @@
 
         // Sample transaction data (in a real application, this would come from a server)
         const transactions = {
-            'TRX001': {
-                date: '2023-05-01',
-                amount: '10,000',
-                currency: 'USD',
-                status: 'Cleared',
-                senderName: 'John Doe',
+            '1099801191101': {
+                date: '2024-11-18',
+                amount: '1,800,000',
+                currency: 'GBP',
+                status: 'Flagged',
+                senderName: 'ABC Capital',
                 senderAccount: '1234567890',
                 senderBank: 'Bank of America',
-                beneficiaryName: 'Jane Smith',
+                beneficiaryName: 'XYZ Consultancy Services',
                 beneficiaryAccount: '0987654321',
                 beneficiaryBank: 'Wells Fargo',
-                notes: 'Payment for consulting services.'
+                notes: 'Payment exceeds GBP 1Mn. Additional verification required.'
             },
-            'TRX002': {
-                date: '2023-05-02',
-                amount: '5,000',
-                currency: 'EUR',
-                status: 'Under Review',
-                senderName: 'Alice Johnson',
-                senderAccount: '2345678901',
-                senderBank: 'Deutsche Bank',
-                beneficiaryName: 'Bob Williams',
-                beneficiaryAccount: '1098765432',
-                beneficiaryBank: 'BNP Paribas',
-                notes: 'Monthly rent payment. Additional verification required.'
+            '1099801191102': {
+                date: '2024-11-19',
+                amount: '1,800,000',
+                currency: 'GBP',
+                status: 'Flagged',
+                senderName: 'ABC Capital',
+                senderAccount: '1234567890',
+                senderBank: 'Swiss Bank',
+                beneficiaryName: 'XYZ Consultancy Services',
+                beneficiaryAccount: '0987654321',
+                beneficiaryBank: 'Wells Fargo',
+                notes: 'Payment exceeds GBP 1Mn. Additional verification required.'
             },
             // Add more transactions as needed
         };
@@ -134,6 +134,22 @@
         }
 
     </style>
+<!--	<script>
+		hostData =
+		{
+		 process ID
+			{
+			   'TextBox0': Transaction ID			   
+		    }
+		} 
+		sendDataToEmbeddedApp = (processID) =>
+		{
+			iframeElement = document.querySelector();
+			iframeElement.contentWindow.postMessage({data: hostData[processID]}, 
+				iframeElement.getAttribute());
+		}
+	</script>
+-->
 </head>
 <body>
     <header>
@@ -143,7 +159,7 @@
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="compliance-screening.html">Compliance Screening</a></li>
+            <li><a href="compliance-screening.html">Compliance Screening > Transaction Details</a></li>
         </ul>
     </nav>
     <div class="page-container">
