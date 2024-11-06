@@ -58,22 +58,30 @@
             overflow: hidden;
             padding: 20px;
         }
-        table {
+         .transaction-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .transaction-table thead {
+            background-color: #004080;
+            color: #fff;
+        }
+        .transaction-table th, .transaction-table td {
+            padding: 12px 20px;
             text-align: left;
+            font-size: 1em;
         }
-        th {
-            background-color: #0a5e96;
-            color: white;
+        .transaction-table tr:nth-child(even) {
+            background-color: #f0f4f8;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .transaction-table tr:hover {
+            background-color: #e1ecf7;
+        }
+        .transaction-table a {
+            color: #004080;
+            text-decoration: none;
         }
          .status-flagged {
             color: white;
@@ -162,7 +170,7 @@
     <div class="compliance-container">
         <h2>Hi Bria!</h2>
         <p>Here is a prioritized list of critical payments for your review:</p>
-        <table>
+        <table class="transaction-table">
             <thead>
                 <tr>
                     <th>Transaction ID</th>
