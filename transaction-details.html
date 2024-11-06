@@ -307,6 +307,30 @@ const sendDataToAARIEmbeddedApp = (message) => {
     }
 }
 <script>
+//ensure the following includes the correct ID of the iframe being embedded
+const sendDataToAARIEmbeddedApp = (message) => {
+    try
+    {
+        /* The data hostData should be an object containing mapped process-id and formElement values */        
+        if (message.aariDataRequest === "aari-data-request")
+        {
+            const hostData = {
+                '581': {
+                    "TextBox0": document.getElementById('transid').innerHTML
+                }
+            }
+            //console.log("Transaction ID: " + document.getElementById('transid').innerHTML);
+            //console.log("Event Data: " + JSON.stringify(message));
+            //console.log("Sending postMessage Request");
+            const iframeElement = document.querySelector('[name="embeddedframe"]');
+            iframeElement.contentWindow.postMessage({data: hostData[message.processId]}, iframeElement.getAttribute('src')); 
+        }        
+    }
+    catch(ex){
+        console.log('>>> ' + ex.getStackTraceString());
+    }
+}
+
 /* message listener to listen for process-id sent by the AARI embedded app */
 window.addEventListener('message',(e) => {
     /* A function(it can be named anything) to send mapped values of FormElements to the AARI app on request of a process-id. Here, the event (e) will have the process-id info in the data key */
