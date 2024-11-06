@@ -4,7 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction Details - ACME Transaction Monitoring</title>
-    <script src="scripts/loadingHandler.js" defer async>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        // Sample transaction data (in a real application, this would come from a server)
+        const transactions = {
+            '1099801191101': {
+                date: '2024-11-18',
+                amount: '1,800,000',
+                currency: 'GBP',
+                status: 'Flagged',
+                senderName: 'ABC Capital',
+                senderAccount: '1234567890',
+                senderBank: 'Bank of America',
+                beneficiaryName: 'XYZ Consultancy Services',
+                beneficiaryAccount: '0987654321',
+                beneficiaryBank: 'Wells Fargo',
+                notes: 'Payment exceeds GBP 1Mn. Additional verification required.'
+            },
+            '1099801191102': {
+                date: '2024-11-19',
+                amount: '1,800,000',
+                currency: 'GBP',
+                status: 'Flagged',
+                senderName: 'ABC Capital',
+                senderAccount: '1234567890',
+                senderBank: 'Swiss Bank',
+                beneficiaryName: 'XYZ Consultancy Services',
+                beneficiaryAccount: '0987654321',
+                beneficiaryBank: 'Wells Fargo',
+                notes: 'Payment exceeds GBP 1Mn. Additional verification required.'
+            },
+            // Add more transactions as needed
+        };
+
+        // Get the transaction ID from the URL
+        const transactionId = getUrlParameter('id');
+
+        // Populate the page with transaction details
+        setTimeout(() => {
+            if (transactions[transactionId]) {
+                const tx = transactions[transactionId];
+                document.getElementById('transid').textContent = transactionId;
+                document.getElementById('date').textContent = tx.date;
+                document.getElementById('amount').textContent = tx.amount;
+                document.getElementById('currency').textContent = tx.currency;
+                document.getElementById('status').textContent = tx.status;
+                document.getElementById('senderName').textContent = tx.senderName;
+                document.getElementById('senderAccount').textContent = tx.senderAccount;
+                document.getElementById('senderBank').textContent = tx.senderBank;
+                document.getElementById('beneficiaryName').textContent = tx.beneficiaryName;
+                document.getElementById('beneficiaryAccount').textContent = tx.beneficiaryAccount;
+                document.getElementById('beneficiaryBank').textContent = tx.beneficiaryBank;
+                document.getElementById('notes').textContent = tx.notes;
+            } else {
+                document.querySelector('.trx-container').innerHTML = '<h2>Transaction not found</h2>';
+            }
+            document.documentElement.style.setProperty('--header-height', document.querySelector('header').offsetHeight + 'px');
+            document.documentElement.style.setProperty('--nav-height', document.querySelector('nav').offsetHeight + 'px');
+        }, [300]);
     </script>
     <style>
         body {
@@ -14,14 +79,36 @@
             padding: 0;
             color: #333;
         }
-        header {
-            background-color: #005f73;
-            color: #fff;
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            width: 100%;
+            padding: 0 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #e60000;
+            margin-right: auto;
+        }
+        .title-container {
             text-align: center;
-            padding: 0.1rem;
+            margin-top: 20px;
+        }
+
+        .title-container h2 {
+            font-size: 24px;
+            color: #333;
         }
         nav {
-            background-color: #0a9396;
+            background-color: #0a5e96;
             color: #fff;
             padding: 0.1rem;
         }
@@ -47,43 +134,19 @@
         .trx-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            max-width: 545px;
-            flex-shrink: 1;
-        }
-        .trx-details-section {
-            display: flex;
-            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
         }
         .detail-section {
             background-color: #f4f4f4;
             border: 1px solid #ddd;
-            padding: 8px;
-            flex-basis: 250px;
-        }
-        .detail-section h4 {
-            margin-block: 8px;
-            color: #005f73;
+            padding: 15px;
+            margin-bottom: 20px;
+            flex: 1;
         }
         .text-data {
             display: flex;
             justify-content: space-between;
-        }
-        .iframe-container {
-            display: flex;
-			flex-direction:column;
-			flex: 1;
-			gap: 20px;            
-            max-width: 100%;
-			height: 800px;
-			width: 100%;
-			padding: 20px;
-			background-color: #fff;
-			border-radius: 8px;
-			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-			margin-top: 15px;
-			margin-left: 15px;
-			float: left;
         }
         h2 {
             color: #005f73;
@@ -106,7 +169,26 @@
             margin-top: 15px;
             margin-left: 15px;
             float: left;
-        }		
+        }
+        .frame-container {
+            display: flex;
+            flex-direction:column;
+            flex: 1;
+            gap: 20px;
+            max-width: 100%;
+            height: 900px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 15px;
+            margin-left: 15px;
+            float: left;
+        }
+        iframe{
+            align-self: flex-end;
+        }
         .card {
             background-color: #f8fafc;
             border: 1px solid #ddd;
@@ -139,16 +221,16 @@
             font-weight: bold;
             margin-top: 12px;
             font-size: 0.95rem;
-        }		
-
+        }
     </style>
-
 </head>
 <body>
-    <header>
-        <h1>Transaction Details</h1>
-    </header>
-
+   <div class="header">
+        <img src="logo.png" alt="FlexPay Logo">
+    </div>
+    <div class="title-container">
+        <h2>Transaction Details</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -161,13 +243,11 @@
                 <h2 id="transactionId">Transaction ID: <span id="transid"></span> </h2>                
                 <div class="card" style="margin-top:40px;">
                     <div class="card-title">Payment Details</div>
-											
                     <div class="data-row">Date: <span id="date"></span></div>
                     <div class="data-row">Amount: <span id="amount"></span></div>
                     <div class="data-row">Currency: <span id="currency"></span></div>
                     <div class="data-row">Status: <span id="status"></span></div>
                 </div>
-				
                 <div class="card">
                     <div class="card-title">Sender Details</div>
                     <div class="data-row">Name: <span id="senderName"></span></div>
@@ -187,12 +267,44 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="iframe-container">
-            <h2>Automation Co-Pilot</h2>
-            <iframe src='https://aa-pmorgdemo.cloud.automationanywhere.digital/copilot?tags=%5B%22Payments%22%5D' name="Automation Co-pilot Assistant" referrerpolicy="origin" width="100%" height="100%" style="border: 1px solid #ddd;"/>
+        <div class="frame-container">
+            <div><h2>Automation Co-Pilot</h2></div>
+            <iframe src='https://aa-pmorgdemo.cloud.automationanywhere.digital/copilot?tags=%5B%22Payments%22%5D' name="embeddedframe" id="embeddedframe" referrerpolicy="origin" width="100%" height="100%" style="border: 1px solid #ddd;"></iframe>
         </div>
     </div>
+
+<!--------------------- Automation Anywhere Script Tag for PostMessage() Data Mapping ------------------->
+<script type="text/javascript">
+//ensure the following includes the correct ID of the iframe being embedded
+const sendDataToAARIEmbeddedApp = (message) => {
+    try
+    {
+        /* The data hostData should be an object containing mapped process-id and formElement values */        
+        if (message.aariDataRequest === "aari-data-request")
+        {
+            const hostData = {
+                '581': {
+                    "TextBox0": document.getElementById('transid').innerHTML
+                }
+            }
+            //console.log("Transaction ID: " + document.getElementById('transid').innerHTML);
+            //console.log("Event Data: " + JSON.stringify(message));
+            //console.log("Sending postMessage Request");
+            const iframeElement = document.querySelector('[name="embeddedframe"]');
+            iframeElement.contentWindow.postMessage({data: hostData[message.processId]}, iframeElement.getAttribute('src')); 
+        }        
+    }
+    catch(ex){
+        console.log('>>> ' + ex.getStackTraceString());
+    }
+}
+
+/* message listener to listen for process-id sent by the AARI embedded app */
+window.addEventListener('message',(e) => {
+    /* A function(it can be named anything) to send mapped values of FormElements to the AARI app on request of a process-id. Here, the event (e) will have the process-id info in the data key */
+    sendDataToAARIEmbeddedApp(e.data);
+});
+</script>
+
 </body>
 </html>
