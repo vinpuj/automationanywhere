@@ -70,13 +70,76 @@
             justify-content: space-between;
         }
         .iframe-container {
-            flex-grow: 2;
-            height: calc(100% - 80px);
-            min-width: 50%;
+            display: flex;
+			flex-direction:column;
+			flex: 1;
+			gap: 20px;            
+            max-width: 100%;
+			height: 800px;
+			width: 100%;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			margin-top: 15px;
+			margin-left: 15px;
+			float: left;
         }
         h2 {
             color: #005f73;
         }
+        .parent {
+            display: flex;
+            justify-content: space-around;
+        }
+        .dashboard-container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            max-width: 400px;
+            height: 900px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 15px;
+            margin-left: 15px;
+            float: left;
+        }		
+        .card {
+            background-color: #f8fafc;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #444;
+        }
+        .data-row span {
+            font-weight: bold;
+        }
+        .note {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 0.95rem;
+        }		
 
     </style>
 
@@ -92,37 +155,39 @@
             <li><a href="compliance-screening.html">Compliance Screening > Transaction Details</a></li>
         </ul>
     </nav>
-    <div class="page-container">
-        <div class="trx-details-section">
-            <h2 id="transactionId">Transaction ID: </h2>
-            <div class="trx-container">
-                <div class="detail-section">
-                    <h4>Payment Details</h4>
-                    <div class="text-data">Date: <span id="date"></span></div>
-                    <div class="text-data">Amount: <span id="amount"></span></div>
-                    <div class="text-data">Currency: <span id="currency"></span></div>
-                    <div class="text-data">Status: <span id="status"></span></div>
+    <div class="parent">
+        <div class="dashboard-container">
+            <div class="trx-details-section">
+                <h2 id="transactionId">Transaction ID: <span id="transid"></span> </h2>                
+                <div class="card" style="margin-top:40px;">
+                    <div class="card-title">Payment Details</div>
+											
+                    <div class="data-row">Date: <span id="date"></span></div>
+                    <div class="data-row">Amount: <span id="amount"></span></div>
+                    <div class="data-row">Currency: <span id="currency"></span></div>
+                    <div class="data-row">Status: <span id="status"></span></div>
+                </div>
+				
+                <div class="card">
+                    <div class="card-title">Sender Details</div>
+                    <div class="data-row">Name: <span id="senderName"></span></div>
+                    <div class="data-row">Account: <span id="senderAccount"></span></div>
+                    <div class="data-row">Bank: <span id="senderBank"></span></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Beneficiary Details</div>
+                    <div class="data-row">Name: <span id="beneficiaryName"></span></div>
+                    <div class="data-row">Account: <span id="beneficiaryAccount"></span></div>
+                    <div class="data-row">Bank: <span id="beneficiaryBank"></span></div>
                 </div>
                 
-                <div class="detail-section">
-                    <h4>Sender Details</h4>
-                    <div class="text-data">Name: <span id="senderName"></span></div>
-                    <div class="text-data">Account: <span id="senderAccount"></span></div>
-                    <div class="text-data">Bank: <span id="senderBank"></span></div>
-                </div>
-                <div class="detail-section">
-                    <h4>Beneficiary Details</h4>
-                    <div class="text-data">Name: <span id="beneficiaryName"></span></div>
-                    <div class="text-data">Account: <span id="beneficiaryAccount"></span></div>
-                    <div class="text-data">Bank: <span id="beneficiaryBank"></span></div>
-                </div>
-                
-                <div class="detail-section">
-                    <h4>Notes</h4>
-                    <p id="notes"></p>
+                <div class="card">
+                    <div class="card-title">Notes</div>
+                    <span class="note" id="notes"></span>
                 </div>
             </div>
         </div>
+
 
         <div class="iframe-container">
             <h2>Automation Co-Pilot</h2>
