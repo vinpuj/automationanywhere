@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction Details - FlexPay Transaction Monitoring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=notifications&display=block" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         // Function to get URL parameters
@@ -230,6 +231,47 @@
             bottom: 0;
             width: 100%;
         }
+        /* Profile and notification container */
+      .profile-notifications {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      /* Bell icon */
+      .notification {
+        position: relative;
+        font-size: 26px;
+        cursor: pointer;
+        color: #555;
+      }
+      /* Notification badge */
+      .notification .badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 3px 6px;
+        font-size: 12px;
+      }
+      /* Avatar */
+      .avatar {
+        width: 32px;
+        height: 32px;
+        background-color: #007bff; /* Adjust color as needed */
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        margin-right: 20px;
+      }
     </style>
 </head>
 <body>
