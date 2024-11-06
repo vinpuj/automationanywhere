@@ -306,16 +306,15 @@ const sendDataToAARIEmbeddedApp = (message) => {
         console.log('>>> ' + ex.getStackTraceString());
     }
 }
-<footer>
-    <p> 🔆 &copy; 2024 FlexPay Transaction Monitoring 🔆 </p>
-</footer>
-
+<script>
 /* message listener to listen for process-id sent by the AARI embedded app */
 window.addEventListener('message',(e) => {
     /* A function(it can be named anything) to send mapped values of FormElements to the AARI app on request of a process-id. Here, the event (e) will have the process-id info in the data key */
     sendDataToAARIEmbeddedApp(e.data);
 });
 </script>
-
+<footer>
+    <p> 🔆 &copy; 2024 FlexPay Transaction Monitoring 🔆 </p>
+</footer>
 </body>
 </html>
