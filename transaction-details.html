@@ -4,71 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction Details - ACME Transaction Monitoring</title>
-    <script>
-        // Function to get URL parameters
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
-
-        // Sample transaction data (in a real application, this would come from a server)
-        const transactions = {
-            '1099801191101': {
-                date: '2024-11-18',
-                amount: '1,800,000',
-                currency: 'GBP',
-                status: 'Flagged',
-                senderName: 'ABC Capital',
-                senderAccount: '1234567890',
-                senderBank: 'Bank of America',
-                beneficiaryName: 'XYZ Consultancy Services',
-                beneficiaryAccount: '0987654321',
-                beneficiaryBank: 'Wells Fargo',
-                notes: 'Payment exceeds GBP 1Mn. Additional verification required.'
-            },
-            '1099801191102': {
-                date: '2024-11-19',
-                amount: '1,800,000',
-                currency: 'GBP',
-                status: 'Flagged',
-                senderName: 'ABC Capital',
-                senderAccount: '1234567890',
-                senderBank: 'Swiss Bank',
-                beneficiaryName: 'XYZ Consultancy Services',
-                beneficiaryAccount: '0987654321',
-                beneficiaryBank: 'Wells Fargo',
-                notes: 'Payment exceeds GBP 1Mn. Additional verification required.'
-            },
-            // Add more transactions as needed
-        };
-
-        // Get the transaction ID from the URL
-        const transactionId = getUrlParameter('id');
-
-        // Populate the page with transaction details
-        setTimeout(() => {
-            if (transactions[transactionId]) {
-                const tx = transactions[transactionId];
-                document.getElementById('transactionId').textContent += transactionId;
-                document.getElementById('date').textContent = tx.date;
-                document.getElementById('amount').textContent = tx.amount;
-                document.getElementById('currency').textContent = tx.currency;
-                document.getElementById('status').textContent = tx.status;
-                document.getElementById('senderName').textContent = tx.senderName;
-                document.getElementById('senderAccount').textContent = tx.senderAccount;
-                document.getElementById('senderBank').textContent = tx.senderBank;
-                document.getElementById('beneficiaryName').textContent = tx.beneficiaryName;
-                document.getElementById('beneficiaryAccount').textContent = tx.beneficiaryAccount;
-                document.getElementById('beneficiaryBank').textContent = tx.beneficiaryBank;
-                document.getElementById('notes').textContent = tx.notes;
-            } else {
-                document.querySelector('.trx-container').innerHTML = '<h2>Transaction not found</h2>';
-            }
-            document.documentElement.style.setProperty('--header-height', document.querySelector('header').offsetHeight + 'px');
-            document.documentElement.style.setProperty('--nav-height', document.querySelector('nav').offsetHeight + 'px');
-        }, [300]);
+    <script src="scripts/loadingHandler.js" defer async>
     </script>
     <style>
         body {
@@ -111,45 +47,39 @@
         .trx-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            max-width: 400px;
+            gap: 8px;
+            max-width: 545px;
+            flex-shrink: 1;
+        }
+        .trx-details-section {
+            display: flex;
+            flex-direction: column;
         }
         .detail-section {
             background-color: #f4f4f4;
             border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 20px;
-            flex: 1;
+            padding: 8px;
+            flex-basis: 250px;
+        }
+        .detail-section h4 {
+            margin-block: 8px;
+            color: #005f73;
         }
         .text-data {
             display: flex;
             justify-content: space-between;
         }
         .iframe-container {
-            flex-grow: 1;
+            flex-grow: 2;
             height: calc(100% - 80px);
+            min-width: 50%;
         }
         h2 {
             color: #005f73;
         }
 
     </style>
-<!--	<script>
-		hostData =
-		{
-		 process ID
-			{
-			   'TextBox0': Transaction ID			   
-		    }
-		} 
-		sendDataToEmbeddedApp = (processID) =>
-		{
-			iframeElement = document.querySelector();
-			iframeElement.contentWindow.postMessage({data: hostData[processID]}, 
-				iframeElement.getAttribute());
-		}
-	</script>
--->
+
 </head>
 <body>
     <header>
@@ -167,7 +97,7 @@
             <h2 id="transactionId">Transaction ID: </h2>
             <div class="trx-container">
                 <div class="detail-section">
-                    <h3>Payment Details</h3>
+                    <h4>Payment Details</h4>
                     <div class="text-data">Date: <span id="date"></span></div>
                     <div class="text-data">Amount: <span id="amount"></span></div>
                     <div class="text-data">Currency: <span id="currency"></span></div>
@@ -175,20 +105,20 @@
                 </div>
                 
                 <div class="detail-section">
-                    <h3>Sender Details</h3>
+                    <h4>Sender Details</h4>
                     <div class="text-data">Name: <span id="senderName"></span></div>
                     <div class="text-data">Account: <span id="senderAccount"></span></div>
                     <div class="text-data">Bank: <span id="senderBank"></span></div>
                 </div>
                 <div class="detail-section">
-                    <h3>Beneficiary Details</h3>
+                    <h4>Beneficiary Details</h4>
                     <div class="text-data">Name: <span id="beneficiaryName"></span></div>
                     <div class="text-data">Account: <span id="beneficiaryAccount"></span></div>
                     <div class="text-data">Bank: <span id="beneficiaryBank"></span></div>
                 </div>
                 
                 <div class="detail-section">
-                    <h3>Notes</h3>
+                    <h4>Notes</h4>
                     <p id="notes"></p>
                 </div>
             </div>

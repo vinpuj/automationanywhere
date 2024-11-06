@@ -58,8 +58,27 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        footer {
+            background-color: #005f73;
+            color: #fff;
+            text-align: center;
+            padding: 0.1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
 
     </style>
+	<script>
+        function Reset Status() {
+            // Get all rows in the table
+            const rows = document.querySelectorAll("table tbody tr td");
+            rows.forEach(row => {
+                // Reset the value in the last column (index 6)
+                row.cells[6].innerText = ""; // or set to a default value like "Flagged"
+            });
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -131,11 +150,17 @@
                     <td>AUD</td>
                     <td>Springfield Nuclear Power Plant</td>
                     <td>Homer Simpson</td>
-                    <td>Flagged</td>
+                    <td>On-Hold</td>
                 </tr>
             </tbody>
         </table>
-    </div>
 
+    </div>
+    <footer>
+        <p> 🔆 &copy; 2024 ACME Transaction Monitoring 🔆 </p>
+		<section>
+			<button onclick="Reset Status()">Reset Status</button> 
+		</section>
+    </footer>
 </body>
 </html>
