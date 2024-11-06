@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlexPay Transaction Monitoring</title>
+    <title>ACME Transaction Monitoring</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=notifications&display=block" rel="stylesheet" />
     <style>
         body {
@@ -13,7 +13,7 @@
             padding: 0;
             color: #333;
         }
-        .header {
+       .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -23,13 +23,14 @@
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .title-container {
-            text-align: center;
+        title-container {
             margin-top: 20px;
+            color: #005f73;
         }
         .title-container h2 {
             font-size: 24px;
             color: #333;
+            text-align: center;
         }
         .header img {
             height: 50px;
@@ -78,13 +79,13 @@
             bottom: 0;
             width: 100%;
         }
-	    /* Profile and notification container */
+      /* Profile and notification container */
       .profile-notifications {
         display: flex;
         align-items: center;
         gap: 15px;
       }
-      /* Bell icon */
+       /* Bell icon */
       .notification {
         position: relative;
         font-size: 26px;
@@ -119,10 +120,65 @@
         text-decoration: none;
         margin-right: 20px;
       }
+         /* Hero Section */
+        .hero {
+            background: url('background.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 1.2em;
+        }
+        /* Features Section */
+        .features {
+            padding: 40px 20px;
+            background-color: #fff;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        .feature-item {
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-item img {
+            width: 70px;
+            margin-bottom: 15px;
+        }
+        /* CTA Section */
+        .cta {
+            background-color: #0a5e96;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .cta a {
+            background-color: #3495d6;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* Contact Section */
+        .contact {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .contact p {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
-     <!--------------------- Header div with logo, notification bell and avatar ------------------->
+<!--------------------- Header div with logo, notification bell and avatar ------------------->
     <div class="header">
         <div class="logo">
                 <img src="logo.png" alt="FlexPay Logo">
@@ -135,44 +191,53 @@
         </div>
         <a href="#profile" class="avatar">BM</a>
       </div>
-    </div> 
-    <div class="title-container">
-        <h2>Transaction Details</h2>
     </div>
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>                        
-           <!-- <li><a href="compliance-screening.html"><mark>Compliance Screening</mark></a></li> -->
+            <li><a href="index.html">Home</a></li>
         </ul>
     </nav>
 
-    <div class="home-container">
-        <section id="home">
-            <h2>Welcome to FlexPay Transaction Monitoring</h2>
-            <p>Secure, efficient, and real-time monitoring for all your currency transactions.</p> 
-			<p>FlexPay Transaction Monitoring is a state-of-the-art platform designed to provide secure and efficient monitoring for currency transactions across the globe. Our team of experts is dedicated to ensuring the safety and integrity of your financial operations.</p>
-			<p>We provide:</p>
-            <ul>
-                <li>Real-time transaction monitoring</li>
-                <li>Advanced fraud detection</li>
-                <li>Multi-currency support</li>                
-                <li>Comprehensive reporting and analytics</li>
-                <li><a href="compliance-screening.html">Compliance Screening</a></li>
-            </ul>
-        </section>
-		<br>
+    <div class="hero">
+        <h1>Secure, Real-Time Monitoring for Your Transactions</h1>
+        <p>FlexPay Transaction Monitoring provides efficient, reliable monitoring with advanced fraud detection and compliance support.</p>
+    </div>
 
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Get in touch with us for more information or to schedule a demo.</p>
-            <p>Email: pm@acme.com</p>
-            <p>Phone: +1 (123) 456-7890</p>			
-			<br></br>
-			<br></br>
-			
-			<a href="https://automationanywhere.atlassian.net/wiki/spaces/PMDO/pages/5497061404/Transaction+Monitoring+Fraud+Prevention" target="_blank" class="btn">Demo Guide</a>
-        </section>
-    </div> 
+    <section id="features" class="features">
+        <div class="feature-item">
+            <img src="monitor.png" alt="Real-Time Monitoring">
+            <h3>Real-Time Monitoring</h3>
+            <p>Stay updated on every transaction with live monitoring to ensure security and integrity.</p>
+        </div>
+        <div class="feature-item">
+            <img src="fraud.png" alt="Fraud Detection">
+            <h3>Advanced Fraud Detection</h3>
+            <p>Protect your business with cutting-edge fraud detection systems tailored for multiple currencies.</p>
+        </div>
+        <div class="feature-item">
+            <img src="currency.png" alt="Multi-Currency Support">
+            <h3>Multi-Currency Support</h3>
+            <p>Process transactions in various currencies, maintaining flexibility for global business.</p>
+        </div>
+        <div class="feature-item">
+            <img src="analytics.png" alt="Analytics">
+            <h3>Comprehensive Analytics</h3>
+            <p>Access detailed reports and analytics to track performance and compliance.</p>
+        </div>
+    </section>
+
+    <section class="cta" id="demo">
+        <h2>Get Started with FlexPay Today</h2>
+        <p>See FlexPay Transaction Monitoring in action with a personalized demo.</p><br/>
+        <a href="https://automationanywhere.atlassian.net/wiki/spaces/PMDO/pages/5497061404/Transaction+Monitoring+Fraud+Prevention">Demo Guide</a>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>For more information or to schedule a demo:</p>
+        <p>Email: pm@flexpay.com</p>
+        <p>Phone: +1 (123) 456-7890</p>
+    </section>
 
     <footer>
         <p> 🔆 &copy; 2024 FlexPay Transaction Monitoring 🔆 </p>
