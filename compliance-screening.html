@@ -169,7 +169,7 @@
 
     <div class="compliance-container">
         <h2>Hi Bria!</h2>
-        <p>Here is a prioritized list of critical payments for your review:</p>
+        <p>Here is a prioritized list of critical payments for your review today:</p>
         <table class="transaction-table">
             <thead>
                 <tr>
@@ -180,6 +180,7 @@
                     <th>Sender</th>
                     <th>Receiver</th>
                     <th>Status</th>
+					<th>Reason</th>
                 </tr>
             </thead>
             <tbody>
@@ -191,6 +192,7 @@
                     <td>ABC Capital</td>
                     <td>XYZ Consultancy Services</td>
                     <td><span class="status-flagged">Flagged</span></td>
+					<td>First time sender</td>
                 </tr>
                 <tr>
                     <td><a href="transaction-details.html?id=1099801191102">1099801191102</a></td>
@@ -200,15 +202,17 @@
                     <td>ABC Capital</td>
                     <td>XYZ Consultancy Services</td>
                     <td><span class="status-flagged">Flagged</span></td>
+					<td>Transaction value exceeds GBP 1M</td>
                 </tr>
                 <tr>
                     <td><a href="transaction-details.html?id=1099801191103">1099801191103</a></td>
                     <td>2024-11-19</td>
                     <td>1,500,000</td>
-                    <td>CAD</td>
-                    <td>Charlie Tremblay</td>
+                    <td>EUR</td>                    
                     <td>Los Pollos Hermanos</td>
+					<td>Charlie Tremblay</td>
                     <td><span class="status-flagged">Flagged</span></td>
+					<td>Suspicious sender</td>
                 </tr>
                 <tr>
                     <td><a href="transaction-details.html?id=1099801191104">1099801191104</a></td>
@@ -218,15 +222,47 @@
                     <td>Madrigal Electromotive GmbH</td>
                     <td>Treadstone</td>
                     <td><span class="status-flagged">Flagged</span></td>
+					<td>Politically exposed receiver</td>
                 </tr>
                 <tr>
                     <td><a href="transaction-details.html?id=1099801191105">1099801191105</a></td>
                     <td>2024-11-19</td>
-                    <td>100,000</td>
+                    <td>900,000</td>
                     <td>AUD</td>
                     <td>Springfield Nuclear Power Plant</td>
                     <td>Homer Simpson</td>
                     <td><span class="status-flagged">Flagged</span></td>
+					<td>Sender is in a blacklisted domain</td>
+                </tr>
+				<tr>
+                    <td><a href="transaction-details.html?id=1099801191105">1099801191106</a></td>
+                    <td>2024-11-19</td>
+                    <td>880,000</td>
+                    <td>CAD</td>
+                    <td>NewAge Fintech</td>
+                    <td>Robinhood</td>
+                    <td><span class="status-flagged">Flagged</span></td>
+					<td>Ghost funding detected</td>
+                </tr>
+				<tr>
+                    <td><a href="transaction-details.html?id=1099801191105">1099801191107</a></td>
+                    <td>2024-11-19</td>
+                    <td>700,000</td>
+                    <td>AED</td>
+                    <td>Sheikh Maktoum Group</td>
+                    <td>Anthony Gignac</td>
+                    <td><span class="status-flagged">Flagged</span></td>
+					<td>Unusual B2C transaction</td>
+                </tr>
+				<tr>
+                    <td><a href="transaction-details.html?id=1099801191105">1099801191108</a></td>
+                    <td>2024-11-19</td>
+                    <td>600,000</td>
+                    <td>INR</td>
+                    <td>Sheikh Maktoum Group</td>
+                    <td>Anthony Gignac</td>
+                    <td><span class="status-flagged">Flagged</span></td>
+					<td>Unusual B2C transaction</td>
                 </tr>
             </tbody>
         </table>
