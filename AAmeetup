@@ -1,0 +1,20 @@
+Hands on session - Intelligent inbox assistant that detects the intent of an email and classifies it as REQUEST/INQUIRY/NONE
+
+Steps
+
+Create an AI Skill > This skill is going to help the automation understand the intent of the incoming emails and classify them
+
+Create a bot 
+  Add the M365 Outlook web trigger in it & configure it with the following values
+      Listen to event = When new email arrives
+      Email address = dev.test@automationanywhere.store
+      Monitor mail folder = Inbox/<your folder name>
+      Control room Oauth connection = Select SD_Outlook
+      Certificate = SD_Outlook_locker > SD_Outlook_cert > cert
+      Response = Create a variable with the name OutlookTriggerData
+  Add the AI Skill to this bot
+  Move the email from source to destination folder automatically
+      Source folder = Inbox/<your folder name>
+      Destination folder = Inbox/REQUEST , Inbox/INQUIRY , Inbox/OTHERS
+
+Run with triggers
