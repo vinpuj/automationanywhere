@@ -1,8 +1,9 @@
-Hands on session - Intelligent inbox assistant that detects the intent of an email and classifies it as REQUEST/INQUIRY/NONE
+Hands-on session - Intelligent inbox assistant that detects the intent of an email and classifies it as REQUEST/INQUIRY/NONE
 
 Steps
 
 Use the pre-built AI Skill named "Bots\Classify email AI Skill" : This skill is going to help the automation understand the intent of the incoming emails and classify them. Notice how the event data is passed over to this skill as an input "$OutlookTriggerData{bodyPreview}$"
+Direct download link: https://github.com/vinpuj/automationanywhere/blob/main/Export.20250306_191226.meetup061%40automationanywhere.com.zip
 
 Create a bot 
   Add the M365 Outlook web trigger in it & configure it with the following values
@@ -22,3 +23,5 @@ Run with triggers
 AI Skill Prompt:
 "Analyze the following email content and determine its primary intent. Based on context, classify the email as one of the following: INQUIRY (asking for clarification or information), REQUEST (asking for a specific action or change), or OTHERS (none of the above). Provide your classification along with a brief explanation for your decision. The output should be just one of these 3 classifications, without the word 'classifications' ".
 Email Content: $email_body$
+
+
