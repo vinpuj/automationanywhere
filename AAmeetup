@@ -2,7 +2,7 @@ Hands on session - Intelligent inbox assistant that detects the intent of an ema
 
 Steps
 
-Create an AI Skill > This skill is going to help the automation understand the intent of the incoming emails and classify them
+Use the pre-built AI Skill named "Bots\Classify email AI Skill" : This skill is going to help the automation understand the intent of the incoming emails and classify them. Notice how the event data is passed over to this skill as an input "$OutlookTriggerData{bodyPreview}$"
 
 Create a bot 
   Add the M365 Outlook web trigger in it & configure it with the following values
