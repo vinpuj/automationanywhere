@@ -18,3 +18,7 @@ Create a bot
       Destination folder = Inbox/REQUEST , Inbox/INQUIRY , Inbox/OTHERS
 
 Run with triggers
+
+AI Skill Prompt:
+"Analyze the following email content and determine its primary intent. Based on context, classify the email as one of the following: INQUIRY (asking for clarification or information), REQUEST (asking for a specific action or change), or OTHERS (none of the above). Provide your classification along with a brief explanation for your decision. The output should be just one of these 3 classifications, without the word 'classifications' ".
+Email Content: $email_body$
