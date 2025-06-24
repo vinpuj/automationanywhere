@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarity Bank Inc. - MSME Underwriting Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .app-id {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .status-badge {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            background: #ffc107;
+            color: #856404;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            fill: #3498db;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .field-value {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            background: #f8f9fa;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .field-value:hover {
+            border-color: #3498db;
+            background: white;
+        }
+
+        .highlight-value {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border-color: #28a745;
+            font-weight: bold;
+            color: #155724;
+        }
+
+        .warning-value {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-color: #ffc107;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .risk-value {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-color: #dc3545;
+            font-weight: bold;
+            color: #721c24;
+        }
+
+        .actions-section {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .actions-section h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-approve {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-reject {
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+            color: white;
+        }
+
+        .btn-hold {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: #856404;
+        }
+
+        .btn-request {
+            background: linear-gradient(135deg, #17a2b8, #007bff);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .notes-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: all 0.2s ease;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .risk-indicator {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .risk-low {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .risk-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .risk-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .application-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Clarity Bank</h1>
+            <p>MSME Loan Underwriting Portal</p>
+        </div>
+
+        <div class="main-content">
+            <div class="application-header">
+                <div class="app-id">Application ID: MSME-2025-001234</div>
+                <div class="status-badge">⏳ Under Review</div>
+            </div>
+
+            <div class="sections-grid">
+                <!-- Basic Information -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        Basic Information
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Business Name</label>
+                            <div class="field-value">Tech Solutions Pvt Ltd</div>
+                        </div>
+                        <div class="field">
+                            <label>Business Type</label>
+                            <div class="field-value">Small Enterprise</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Proprietor Name</label>
+                            <div class="field-value">Rajesh Kumar</div>
+                        </div>
+                        <div class="field">
+                            <label>Years in Business</label>
+                            <div class="field-value highlight-value">7 Years</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Industry Sector</label>
+                            <div class="field-value">Information Technology</div>
+                        </div>
+                        <div class="field">
+                            <label>Employee Count</label>
+                            <div class="field-value">25</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loan Details -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+                        </svg>
+                        Loan Details
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Loan Amount Requested</label>
+                            <div class="field-value">₹50,00,000</div>
+                        </div>
+                        <div class="field">
+                            <label>Loan Purpose</label>
+                            <div class="field-value">Business Expansion</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Tenure Requested</label>
+                            <div class="field-value">5 Years</div>
+                        </div>
+                        <div class="field">
+                            <label>Collateral Offered</label>
+                            <div class="field-value highlight-value">Property (₹75L)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Profile -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                        </svg>
+                        Financial Profile
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Annual Turnover</label>
+                            <div class="field-value highlight-value">₹2.8 Crores</div>
+                        </div>
+                        <div class="field">
+                            <label>Monthly Revenue (Avg)</label>
+                            <div class="field-value">₹23,50,000</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Profit Margin</label>
+                            <div class="field-value highlight-value">18.5%</div>
+                        </div>
+                        <div class="field">
+                            <label>Current Assets</label>
+                            <div class="field-value">₹1.2 Crores</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Current Liabilities</label>
+                            <div class="field-value">₹45,00,000</div>
+                        </div>
+                        <div class="field">
+                            <label>Debt-to-Equity</label>
+                            <div class="field-value warning-value">0.68</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Assessment -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19v2h-1.5v16H19v2H5v-2h1.5V4H5V2h1.5C7.88 2 9 3.12 9 4.5V6h6V4.5C15 3.12 16.12 2 17.5 2z"/>
+                        </svg>
+                        Credit Assessment
+                        <span class="risk-indicator risk-low">Low Risk</span>
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>CIBIL Score</label>
+                            <div class="field-value highlight-value">782</div>
+                        </div>
+                        <div class="field">
+                            <label>Credit History</label>
+                            <div class="field-value highlight-value">12 Years</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Existing Loans</label>
+                            <div class="field-value warning-value">₹15,00,000</div>
+                        </div>
+                        <div class="field">
+                            <label>EMI-to-Income</label>
+                            <div class="field-value warning-value">32%</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Repayment History</label>
+                            <div class="field-value highlight-value">No Defaults</div>
+                        </div>
+                        <div class="field">
+                            <label>Banking Relationship</label>
+                            <div class="field-value highlight-value">5 Years</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Operations -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Business Operations
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Order Book Value</label>
+                            <div class="field-value highlight-value">₹95,00,000</div>
+                        </div>
+                        <div class="field">
+                            <label>Major Clients</label>
+                            <div class="field-value">TCS, Infosys, Wipro</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Business Licenses</label>
+                            <div class="field-value highlight-value">All Valid</div>
+                        </div>
+                        <div class="field">
+                            <label>GST Compliance</label>
+                            <div class="field-value highlight-value">Regular Filer</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Office Premises</label>
+                            <div class="field-value">Owned</div>
+                        </div>
+                        <div class="field">
+                            <label>Market Presence</label>
+                            <div class="field-value">Regional</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Educational & Personal -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                        </svg>
+                        Educational & Personal
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Education</label>
+                            <div class="field-value">B.Tech Computer Science</div>
+                        </div>
+                        <div class="field">
+                            <label>Age</label>
+                            <div class="field-value">42 Years</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Experience</label>
+                            <div class="field-value highlight-value">15 Years IT</div>
+                        </div>
+                        <div class="field">
+                            <label>Certifications</label>
+                            <div class="field-value">PMP, AWS Cloud</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Family Members</label>
+                            <div class="field-value">4 (Spouse + 2 Children)</div>
+                        </div>
+                        <div class="field">
+                            <label>Residence</label>
+                            <div class="field-value">Owned (15 Years)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Analysis -->
+                <div class="section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Risk Analysis
+                    </h3>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Industry Risk</label>
+                            <div class="field-value highlight-value">Low (Stable IT)</div>
+                        </div>
+                        <div class="field">
+                            <label>Geographic Risk</label>
+                            <div class="field-value highlight-value">Low (Tier-1 City)</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Cash Flow Stability</label>
+                            <div class="field-value highlight-value">High</div>
+                        </div>
+                        <div class="field">
+                            <label>Collateral Coverage</label>
+                            <div class="field-value highlight-value">150%</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Overall Risk Rating</label>
+                            <div class="field-value highlight-value">A- (Low Risk)</div>
+                        </div>
+                        <div class="field">
+                            <label>Recommended Rate</label>
+                            <div class="field-value">12.5% - 13.5%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Underwriter Notes -->
+                <div class="section notes-section">
+                    <h3>
+                        <svg class="section-icon" viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                        Underwriter Notes & Comments
+                    </h3>
+                    <textarea class="notes-textarea" placeholder="Enter your detailed analysis, observations, and recommendations here...
+
+Key Points to Consider:
+• Strong financial profile with consistent growth
+• Excellent credit history and CIBIL score
+• Good collateral coverage
+• Stable IT industry with recurring revenue model
+• Long-standing business relationships
+
+Recommendation: APPROVE with standard terms"></textarea>
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <h3>⚡ Underwriting Decision</h3>
+                <div class="action-buttons">
+                    <button class="btn btn-approve" onclick="handleDecision('approve')">
+                        ✅ APPROVE LOAN
+                    </button>
+                    <button class="btn btn-reject" onclick="handleDecision('reject')">
+                        ❌ REJECT APPLICATION
+                    </button>
+                    <button class="btn btn-hold" onclick="handleDecision('hold')">
+                        ⏸️ PUT ON HOLD
+                    </button>
+                    <button class="btn btn-request" onclick="handleDecision('request')">
+                        📋 REQUEST MORE INFO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleDecision(action) {
+            const messages = {
+                approve: 'Loan application approved! Proceeding to documentation phase.',
+                reject: 'Application rejected. Applicant will be notified with reasons.',
+                hold: 'Application placed on hold. Additional review required.',
+                request: 'Information request sent to applicant. Application status updated.'
+            };
+            
+            alert(messages[action]);
+            
+            // Update status badge
+            const statusBadge = document.querySelector('.status-badge');
+            const statusTexts = {
+                approve: '✅ Approved',
+                reject: '❌ Rejected', 
+                hold: '⏸️ On Hold',
+                request: '📋 Info Requested'
+            };
+            statusBadge.textContent = statusTexts[action];
+            statusBadge.style.animation = 'none';
+        }
+
+        // Add hover effects to sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseenter', () => {
+                section.style.transform = 'translateY(-5px)';
+            });
+            
+            section.addEventListener('mouseleave', () => {
+                section.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    pointer-events: none;
+                    animation: ripple 0.6s ease-out;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+            .btn {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
